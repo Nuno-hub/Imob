@@ -177,7 +177,7 @@ def load_property_details(url, log_file, sql, conn, num_carregamento, site, uso,
             if data[i]=='name':     
                 distrito = data[i+1].replace('(distrito)', '')  
                 distrito = distrito.rstrip()
-                print('distrito: ', distrito)
+                #print('distrito: ', distrito)
                 break
         
         # Concelho
@@ -247,7 +247,7 @@ def load_property_details(url, log_file, sql, conn, num_carregamento, site, uso,
             'descricao': descricao,
             'ref_interna': ref_interna,
             'id_anuncio': id_anuncio, 
-            'data_carregamento_bd': str(datetime.datetime.now()),
+            'data_carregamento_bd': str(datetime.now()),
             'site': site,
             'agencia': agencia,
             'ano_construcao': ano_construcao,
@@ -255,6 +255,7 @@ def load_property_details(url, log_file, sql, conn, num_carregamento, site, uso,
             'area_terreno': area_terreno
             }
         
+        print('Zona: ', distrito + ' > ' + concelho + ' > ' + freguesia)
         sql.insert(conn, values)
         return True
         
