@@ -43,7 +43,6 @@ CREATE TABLE IF NOT EXISTS loadcontrol
  CONSTRAINT PK_LOADCONTROL PRIMARY KEY (num_carregamento));
 
 
-
 -- Aggregated table
 CREATE table imoveis_agg as SELECT * from 
 (select count(*) num_reg, round(avg(comp.preco/comp.area_util), 2) preco_m2,
