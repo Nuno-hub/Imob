@@ -15,6 +15,14 @@ tipo_imoveis =['apartamento', 'moradia', 'quintaeherdade', 'predio']
 #tipo_imoveis = ['apartamento']
 regions = {'lisboa':11, 'setubal':15}
 
+for region, region_id in regions.items():
+    for tipo_imovel in tipo_imoveis:
+        for uso in usos:
+            print('Start creating list file (' + region +' | '+ tipo_imovel +' | '+ uso + ')...')
+            plist.create_properties_list_file(uso, tipo_imovel, region, region_id)
+            print('Finish creating list file (' + region +' | '+ tipo_imovel +' | '+ uso + ').')
+            print()
+
 site = 'Imovirtual'
 num_carregamento = iutil.start_carregamento(site, usos, tipo_imoveis, regions)
 

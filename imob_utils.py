@@ -7,7 +7,7 @@ import os
 
 def error_log_file():
     '''Create a log file with timestamp in the name.'''
-    x = str(datetime.datetime.now())
+    x = str(datetime.now())
     x = x.replace(".", "_")
     x = x.replace(":", "_")
     x = x.replace(" ", "_")
