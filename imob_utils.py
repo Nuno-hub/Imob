@@ -1,5 +1,5 @@
 from urllib.request import Request, urlopen
-from datetime import datetime
+import datetime
 import traceback
 from xmlrpc.client import boolean
 from SQLData import SQLData
@@ -7,7 +7,7 @@ import os
 
 def error_log_file():
     '''Create a log file with timestamp in the name.'''
-    x = str(datetime.now())
+    x = str(datetime.datetime.now())
     x = x.replace(".", "_")
     x = x.replace(":", "_")
     x = x.replace(" ", "_")
@@ -31,12 +31,12 @@ def open_page(url, error_log_file):
         except:
             e = traceback.format_exc()
             # print(">------------------------- open_page(url) --------------------------------------")
-            # print(str(datetime.now()))
+            # print(str(datetime.datetime.now()))
             # print("url:", url)
             # print("Error trace: ", e)
             # print("-------------------------- open_page(url) -------------------------------------<")
             error_log_file.write(">------------------------- open_page(url) --------------------------------------" + "\n")
-            error_log_file.write(str(datetime.now()))
+            error_log_file.write(str(datetime.datetime.now()))
             error_log_file.write("url: " + url + "\n")
             error_log_file.write("Error trace: " + e + "\n")
             error_log_file.write("-------------------------- open_page(url) -------------------------------------<" + "\n")
@@ -89,7 +89,7 @@ def start_carregamento(siteimob: str,
     print('num_carregamento: ', num_carregamento)
     
     
-    datetime_start = datetime.now()
+    datetime_start = datetime.datetime.now()
     datetime_start = datetime_start.strftime("%Y-%m-%d, %H:%M:%S")
     datetime_stop = None
     details = '[' + ' '.join(usos) + '] ' + \
@@ -124,7 +124,7 @@ def stop_carregamento(num_carregamento: int):
     conn = sql.connect()
     cursor = conn.cursor()
     
-    datetime_stop = datetime.now()
+    datetime_stop = datetime.datetime.now()
     datetime_stop = datetime_stop.strftime("%Y-%m-%d, %H:%M:%S")
     
     sql_Update = "update loadcontrol set datetime_stop=:datetime_stop \
@@ -141,7 +141,7 @@ def stop_carregamento(num_carregamento: int):
     
 def write2log_file(error_log_file, e, href, pag, url_next):
         error_log_file.write(">--------------------------------------------------------------------------------------------" + "\n")
-        error_log_file.write(str(datetime.now())+ "\n")
+        error_log_file.write(str(datetime.datetime.now())+ "\n")
         error_log_file.write("href: " + href + "\n")
         if pag!=0: error_log_file.write("pag: " + str(pag) + "\n")
         if pag!='': error_log_file.write("url_next: " + url_next + "\n")
