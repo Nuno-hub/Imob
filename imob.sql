@@ -44,22 +44,26 @@ CREATE TABLE IF NOT EXISTS loadcontrol
 
 
 -- Aggregated table
+DROP TABLE IF EXISTS imoveis_agg;
+
 CREATE table imoveis_agg as SELECT * from 
-(select count(*) num_reg, round(avg(comp.preco/comp.area_util), 2) preco_m2,
+(select count(*) num_reg, round(avg(comp.preco), 2) preco_medio, 
+round(avg(comp.preco/comp.area_util), 2) preco_m2,
 comp.distrito, comp.concelho, comp.freguesia, comp.uso, comp.tipologia,
 comp.tipo_imovel
 FROM imoveis comp
-WHERE comp.num_carregamento=1
+WHERE comp.num_carregamento=11
 AND comp.uso = 'comprar'
 --AND comp.tipo_imovel='apartamento' 
 GROUP BY comp.distrito, comp.concelho, comp.freguesia, comp.uso, comp.tipologia,
 IFNULL(comp.tipo_imovel, 'null')
 UNION ALL
-select count(*) num_reg, round(avg(arr.preco/arr.area_util), 2) preco_m2, 
+select count(*) num_reg, round(avg(arr.preco), 2) preco_medio, 
+round(avg(arr.preco/arr.area_util), 2) preco_m2, 
 arr.distrito, arr.concelho, arr.freguesia, arr.uso, arr.tipologia,
 arr.tipo_imovel
 FROM imoveis arr
-WHERE arr.num_carregamento=1
+WHERE arr.num_carregamento=11
 AND arr.uso = 'arrendar'
 --AND arr.tipo_imovel='apartamento' 
 GROUP BY arr.distrito, arr.concelho, arr.freguesia, arr.uso, arr.tipologia,
